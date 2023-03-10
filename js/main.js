@@ -11,16 +11,17 @@ function checkLength(str, maxLength) {
   return str.length <= maxLength;
 }
 
-function getArr() {
-  const arr = [];
+function getPhotos() {
+  const photos = [];
   for (let i = 0; i < 25; i++) {
-    arr[i] = {
+    const newElem = {
       id: i+1,
       url: `photos/${i+1}.jpg`,
-      description: `Ссылка: ${arr[i].url}, номер: ${arr[i].id}`,
+      description: `Ссылка: ${photos[i].url}, номер: ${photos[i].id}`,
       likes: getRandomInt(15,200),
       comments: getRandomInt(0,200)
     };
+    photos.push(newElem);
   }
-  return arr;
+  return photos;
 }
