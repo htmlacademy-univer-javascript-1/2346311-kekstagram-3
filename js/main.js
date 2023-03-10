@@ -7,8 +7,8 @@ function getRandomInt(min, max) {
   return Math.round(Math.random() * (max-min) + min);
 }
 
-function lengthCheck(String, maxLength) {
-  return String.length <= maxLength;
+function checkLength(str, maxLength) {
+  return str.length <= maxLength;
 }
 
 function getArr() {
