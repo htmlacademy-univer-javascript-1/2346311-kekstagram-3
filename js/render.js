@@ -1,9 +1,9 @@
-import { photos } from "./data";
+import { photos } from './data';
 const pictureTemplate = document.querySelector('#picture').content;
 
 const fragment = new DocumentFragment();
 
-photos.forEach(photo => {
+photos.forEach((photo) => {
   const template = pictureTemplate.cloneNode(true);
   const img = template.querySelector('.picture__img');
   const likes = template.querySelector('.picture__likes');
