@@ -16,7 +16,7 @@ photos.forEach((photo) => {
   fragment.appendChild(template);
 });
 
-const picktureBlock = document.querySelector('.pictures');
-picktureBlock.append(fragment);
+const pictureBlock = document.querySelector('.pictures');
+pictureBlock.append(fragment);
 
-export { picktureBlock };
+export { pictureBlock };
