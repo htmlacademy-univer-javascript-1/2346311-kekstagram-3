@@ -1,4 +1,4 @@
-import './data';
-import './util';
-import './render';
+import './data.js';
+import './util.js';
+import './render.js';
 

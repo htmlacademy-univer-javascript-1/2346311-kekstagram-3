@@ -1,4 +1,4 @@
-import { photos } from './data';
+import { photos } from './data.js';
 const pictureTemplate = document.querySelector('#picture').content;
 
 const fragment = new DocumentFragment();
