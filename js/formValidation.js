@@ -1,11 +1,11 @@
 import {checkLength} from './util.js';
 
-const hashtagPattern = RegExp('^#[а-яА-ЯёЁa-zA-Z0-9]{1-19}$');
+const hashtagPattern = new RegExp('^#[а-яА-ЯёЁa-zA-Z0-9]{1-19}$');
 const form = document.querySelector('img-upload__form');
-const valid = Pristine(form, {
+const valid = new Pristine(form, {
   classTo: 'img-upload__text',
-  successClass: 'form--valid',
-  errorClass: 'form--invalid',
+  successClass: 'img-upload__text--valid',
+  errorClass: 'img-upload__text--invalid',
   errorTextParent: 'img-upload__text',
   errorTextClass: 'form__error',
   errorTextTag: 'span'
