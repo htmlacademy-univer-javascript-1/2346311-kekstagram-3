@@ -1,3 +1,5 @@
+import {addEffect} from './effects.js';
+
 const imgUpload = document.querySelector('.img-upload__overlay');
 const fileInput = document.querySelector('.img-upload__input');
 const closeImgUploadButton = document.querySelector('.img-upload__cancel');
@@ -23,6 +25,7 @@ function escapeKeyHandler(ev) {
 }
 
 function openImgUpload() {
+  addEffect(document.querySelector('#effect-none'));
   imgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', escapeKeyHandler);
