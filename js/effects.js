@@ -19,42 +19,46 @@ for (let i = 0; i < labels.length; i++) {
   }
 }
 
-effectLevelValue.addEventListener('input', (evt) => {
-  evt.preventDefault();
+effectLevelValue.addEventListener('input', () => {
   const style = getComputedStyle(imagePreview);
   const filter = style.filter.startsWith;
   switch (filter) {
     case 'invert': {
       effectLevelValue.max = 100;
-      effectLevelValue.step = 5;
+      effectLevelValue.min = 0;
+      effectLevelValue.step = 1;
       imagePreview.style.filter = `invert(${effectLevelValue.value}%)`;
       break;
     }
 
     case 'sepia': {
       effectLevelValue.max = 1;
-      effectLevelValue.step = 0.05;
+      effectLevelValue.min = 0;
+      effectLevelValue.step = 0.1;
       imagePreview.style.filter = `sepia(${effectLevelValue.value})`;
       break;
     }
 
     case 'blur': {
       effectLevelValue.max = 3;
-      effectLevelValue.step = 0.15;
+      effectLevelValue.min = 0;
+      effectLevelValue.step = 0.1;
       imagePreview.style.filter = `blur(${effectLevelValue.value}px)`;
       break;
     }
 
     case 'brightness': {
       effectLevelValue.max = 3;
-      effectLevelValue.step = 0.15;
+      effectLevelValue.min = 1;
+      effectLevelValue.step = 0.1;
       imagePreview.style.filter = `brightness(${effectLevelValue.value})`;
       break;
     }
 
     case 'grayscale': {
       effectLevelValue.max = 1;
-      effectLevelValue.step = 0.05;
+      effectLevelValue.min = 0;
+      effectLevelValue.step = 0.1;
       imagePreview.style.filter = `grayscale(${effectLevelValue.value})`;
       break;
     }
