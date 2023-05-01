@@ -1,8 +1,8 @@
-import { closeImgUpload } from './form.js';
 import { checkLength } from './util.js';
 
-const hashtagRegex = /\W(#[а-яa-z]+\b)/gmi;
-const form = document.querySelector('img-upload__form');
+const form = document.querySelector('.img-upload__form');
+const comment = form.querySelector('.text__description');
+const hashtagRegex = new RegExp('\\W(#[\\p{L}]+\\b)');
 const isHashtagValid = (value) => checkLength(value, 20) && !checkLength(value, 2) && !hashtagRegex.test(value);
 
 
@@ -19,12 +19,18 @@ const valid = new Pristine(form, {
 valid.addValidator(
   form.querySelector('.text__hashtags'),
   isHashtagValid,
-  'Формат хэштега: #anySymbols(<=20)');
+  'Формат хэштега: #anySymbols([3..20])');
+
+
+comment.addEventListener('change', (evt) => {
+  if (!valid.validate()) {
+    evt.preventDefault();
+  }
+});
 
 
 form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
   if (!valid.validate()) {
-    closeImgUpload();
+    evt.preventDefault();
   }
 });
