@@ -5,9 +5,7 @@ const buttonDown = document.querySelector('.scale__control--smaller');
 
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 
-
 const filterLabels = document.querySelectorAll('.effects__label');
-
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderElementValue = document.querySelector('.effect-level__value');
@@ -66,9 +64,11 @@ noUiSlider.create(sliderElement, {
     min: 0,
     max: 100,
   },
-  start: 0,
+  start: 100,
   step: 1,
+  connect: 'lower'
 });
+
 
 sliderElement.setAttribute('hidden', true);
 
@@ -98,9 +98,7 @@ function addEffect(effect, update) {
       image.className = '';
       image.classList.add(`effects__preview--${effect}`);
       currentEffect = effect;
-    }
-
-    if (update) {
+    } else {
       const sliderValue = sliderElement.noUiSlider.get();
       image.style.filter = `${name}(${sliderValue}${measure})`;
     }
@@ -118,6 +116,12 @@ filterLabels.forEach((label) => {
   const effect = label.getAttribute('for').slice(7);
   label.addEventListener('click', () => {
     addEffect(effect);
+  });
+});
+
+filterLabels.forEach( (element) => {
+  element.addEventListener('click', () => {
+    addEffect(element.value);
   });
 });
 
@@ -145,3 +149,4 @@ buttonDown.addEventListener('click', () => {
 buttonUp.addEventListener('click', () => {
   changeImageScale(true, imgUploadPreview);
 });
+export {changeImageScale, addEffect, imgUploadPreview};
