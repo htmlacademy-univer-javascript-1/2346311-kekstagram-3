@@ -1,26 +1,22 @@
+import { resetImage } from './effects.js';
+
+
 const imgUpload = document.querySelector('.img-upload__overlay');
 const fileInput = document.querySelector('.img-upload__input');
 const closeImgUploadButton = document.querySelector('.img-upload__cancel');
+const form = document.querySelector('.img-upload__form');
+const submitButton = document.querySelector('.img-upload__submit');
 
 
 function cleanForm() {
   document.querySelector('.text__hashtags').value = '';
   document.querySelector('.text__description').value = '';
   document.querySelector('#upload-file').value = '';
-
-
-  const imgUploadPreview = document.querySelector('.img-upload__preview');
-  const scale = document.querySelector('.scale__control--value');
-  scale.value = `${100}%`;
-  imgUploadPreview.style.setProperty('transform','scale(1.0)');
-  const image = imgUploadPreview.querySelector('img');
-  image.style.filter = 'none';
-  const effectsList = document.querySelector('.effects__list');
-  const originalEffect = effectsList.querySelector('#effect-none');
-  originalEffect.click();
-  const sliderElement = document.querySelector('.effect-level__slider');
-  sliderElement.setAttribute('hidden', true);
+  form.reset();
+  submitButton.disabled = false;
+  resetImage();
 }
+
 
 function closeImgUpload() {
   imgUpload.classList.add('hidden');
@@ -28,6 +24,7 @@ function closeImgUpload() {
   document.removeEventListener('keydown', escapeKeyHandler);
   cleanForm();
 }
+
 
 function escapeKeyHandler(ev) {
   if (ev.key === 'Escape') {
@@ -40,7 +37,13 @@ function openImgUpload() {
   imgUpload.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', escapeKeyHandler);
+  const img = document.querySelector('.img-upload__preview').querySelector('img');
+  img.src = window.URL.createObjectURL(fileInput.files[0]);
 }
+
 
 fileInput.addEventListener('change', openImgUpload);
 closeImgUploadButton.addEventListener('click', closeImgUpload);
+
+
+export {closeImgUpload};

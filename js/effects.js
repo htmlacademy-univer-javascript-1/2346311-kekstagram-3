@@ -10,6 +10,8 @@ const filterLabels = document.querySelectorAll('.effects__label');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderElementValue = document.querySelector('.effect-level__value');
 
+const image = imgUploadPreview.querySelector('img');
+
 
 let currentEffect = 'original';
 const filters = {
@@ -74,7 +76,6 @@ sliderElement.setAttribute('hidden', true);
 
 
 function addEffect(effect, update) {
-  const image = imgUploadPreview.querySelector('img');
 
   const filter = filters[effect];
 
@@ -86,11 +87,11 @@ function addEffect(effect, update) {
     image.className = '';
   } else {
     if (!update) {
-      image.style.setProperty('filter', `${name}(${min}${measure})`);
+      image.style.setProperty('filter', `${name}(${max}${measure})`);
 
       sliderElement.noUiSlider.updateOptions({
         range: { min, max },
-        start: min,
+        start: max,
         step
       });
 
@@ -126,7 +127,7 @@ filterLabels.forEach( (element) => {
 });
 
 
-const changeImageScale = (plus = true, image) => {
+const changeImageScale = (plus = true, img) => {
   let value = parseInt(scale.value, 10) + (plus ? 25 : -25);
 
   if (value < 25) {
@@ -138,7 +139,7 @@ const changeImageScale = (plus = true, image) => {
 
   scale.value = `${value}%`;
 
-  image.style.transform = `scale(${value / 100})`;
+  img.style.transform = `scale(${value / 100})`;
 };
 
 
@@ -149,4 +150,14 @@ buttonDown.addEventListener('click', () => {
 buttonUp.addEventListener('click', () => {
   changeImageScale(true, imgUploadPreview);
 });
-export {changeImageScale, addEffect, imgUploadPreview};
+
+
+function resetImage() {
+  scale.value = `${100}%`;
+  imgUploadPreview.style.setProperty('transform','scale(1.0)');
+  addEffect('none');
+  filterLabels[0].click();
+}
+
+
+export {resetImage};
