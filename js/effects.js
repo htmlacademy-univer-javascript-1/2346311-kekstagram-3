@@ -20,35 +20,40 @@ const filters = {
     max: 1,
     name: 'grayscale',
     step: 0.1,
-    measure: ''
+    measure: '',
+    index: 1
   },
   'sepia' : {
     min: 0,
     max: 1,
     name: 'sepia',
     step: 0.1,
-    measure: ''
+    measure: '',
+    index: 2
   },
   'marvin': {
     min: 0,
     max: 100,
     name: 'invert',
     step: 1,
-    measure: '%'
+    measure: '%',
+    index: 3
   },
   'phobos': {
     min: 0,
     max: 3,
     name: 'blur',
     step: 0.1,
-    measure: 'px'
+    measure: 'px',
+    index: 4
   },
   'heat': {
     min: 1,
     max: 3,
     name: 'brightness',
     step: 0.1,
-    measure: ''
+    measure: '',
+    index: 5
   },
 
   'none': {
@@ -56,7 +61,8 @@ const filters = {
     max: 1,
     name: 'original',
     step: 0,
-    measure: ''
+    measure: '',
+    index: 0
   }
 };
 
@@ -152,12 +158,18 @@ buttonUp.addEventListener('click', () => {
 });
 
 
-function resetImage() {
-  scale.value = `${100}%`;
-  imgUploadPreview.style.setProperty('transform','scale(1.0)');
-  addEffect('none');
-  filterLabels[0].click();
+function setEffect(formData) {
+  const currentScale = formData.scale;
+  const currentFilter = formData.filter;
+
+  scale.value = `${currentScale}%`;
+  imgUploadPreview.style.transform = `scale(${currentScale / 100})`;
+  addEffect(currentFilter);
+  filterLabels[filters[currentFilter].index].click();
 }
 
+function getFilter() {
+  return currentEffect;
+}
 
-export {resetImage};
+export {setEffect, getFilter};

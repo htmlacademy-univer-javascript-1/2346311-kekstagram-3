@@ -14,6 +14,7 @@ const pristineComment  = new Pristine (form, {
   errorTextClass: 'form__error'
 });
 
+
 const pristineHashTag  = new Pristine (form, {
   classTo: 'img-upload__text',
   errorClass: 'form--invalid',
@@ -23,19 +24,23 @@ const pristineHashTag  = new Pristine (form, {
   errorTextClass: 'form__error'
 });
 
+
 function validateComment (value) {
   return !checkLength(value, MIN_COMMENT_LENGTH) && checkLength(value, MAX_COMMENT_LENGTH);
 }
 
+
 function validateHashTag (value) {
   return HASHTAG_REGEX.test(value) && !checkLength(value, MIN_HASHTAG_LENGTH) && checkLength(value, MAX_HASHTAG_LENGTH);
 }
+
 
 pristineComment.addValidator(
   form.querySelector('.text__description'),
   validateComment,
   'Комментарий должен быть от 20 до 140 символов'
 );
+
 
 pristineHashTag.addValidator(
   form.querySelector('.text__hashtags'),

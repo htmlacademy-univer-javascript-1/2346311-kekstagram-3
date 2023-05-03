@@ -16,6 +16,7 @@ export const fetchData = (onSuccess) => {
     });
 };
 
+
 export const sendData =(onSuccess, body) => {
   fetch(`${SERVER_URL}`, {
     method: 'POST',
