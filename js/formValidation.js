@@ -3,7 +3,8 @@ import { closeImgUpload } from './form.js';
 import { sendData } from './server.js';
 
 const form = document.querySelector('.img-upload__form');
-
+const description = form.querySelector('.text__description');
+const hashtag = form.querySelector('.text__hashtags');
 
 const pristineComment  = new Pristine (form, {
   classTo: 'img-upload__text',
@@ -36,14 +37,14 @@ function validateHashTag (value) {
 
 
 pristineComment.addValidator(
-  form.querySelector('.text__description'),
+  description,
   validateComment,
   'Комментарий должен быть от 20 до 140 символов'
 );
 
 
 pristineHashTag.addValidator(
-  form.querySelector('.text__hashtags'),
+  hashtag,
   validateHashTag,
   'Формат хэштега: #anySymbols([3..20])'
 );
@@ -61,3 +62,6 @@ form.addEventListener('submit', (evt) => {
     closeImgUpload();
   }
 });
+
+
+export {description, hashtag};

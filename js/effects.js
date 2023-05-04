@@ -1,3 +1,5 @@
+import { MAX_SCALE_IMG, MIN_SCALE_IMG } from './util.js';
+
 const scale = document.querySelector('.scale__control--value');
 
 const buttonUp = document.querySelector('.scale__control--bigger');
@@ -136,11 +138,11 @@ filterLabels.forEach( (element) => {
 const changeImageScale = (plus = true, img) => {
   let value = parseInt(scale.value, 10) + (plus ? 25 : -25);
 
-  if (value < 25) {
-    value = 25;
+  if (value < MIN_SCALE_IMG) {
+    value = MIN_SCALE_IMG;
   }
-  if (value > 100) {
-    value = 100;
+  if (value > MAX_SCALE_IMG) {
+    value = MAX_SCALE_IMG;
   }
 
   scale.value = `${value}%`;
@@ -172,4 +174,9 @@ function getFilter() {
   return currentEffect;
 }
 
-export {setEffect, getFilter};
+function getScale() {
+  return parseFloat(scale.value);
+}
+
+
+export { setEffect, getFilter, getScale };

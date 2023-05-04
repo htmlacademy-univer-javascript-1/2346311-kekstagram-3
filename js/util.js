@@ -27,7 +27,7 @@ function showAlert(message) {
   document.body.appendChild(alertContainer);
   setTimeout(() => {
     alertContainer.remove();
-  }, 10000);
+  }, 7000);
 }
 
 
@@ -39,9 +39,11 @@ const HASHTAG_REGEX = new RegExp('^#[а-яa-zA-ZА-ЯёЁ0-9]{1,19}$');
 const SERVER_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 const ERR_FETCH_MESSAGE = 'Не удалось загрузить данные. Перезагрузите страницу';
 const ERR_SEND_MESSAGE = 'Не удалось отправить форму. Проверьте свое соединение';
-
+const MIN_SCALE_IMG = 25;
+const MAX_SCALE_IMG= 100;
 
 export {
   getRandomInt, checkLength, showAlert,
-  MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, HASHTAG_REGEX, MIN_HASHTAG_LENGTH, MAX_HASHTAG_LENGTH, SERVER_URL, ERR_FETCH_MESSAGE, ERR_SEND_MESSAGE
+  MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, HASHTAG_REGEX, MIN_HASHTAG_LENGTH, MAX_HASHTAG_LENGTH, SERVER_URL, ERR_FETCH_MESSAGE, ERR_SEND_MESSAGE,
+  MIN_SCALE_IMG, MAX_SCALE_IMG
 };

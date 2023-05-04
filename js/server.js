@@ -1,4 +1,7 @@
 import { showAlert, SERVER_URL, ERR_FETCH_MESSAGE, ERR_SEND_MESSAGE } from './util.js';
+import { getSrc, showMessage} from './form.js';
+import { hashtag, description } from './formValidation.js';
+import { getFilter, getScale } from './effects.js';
 
 
 export const fetchData = (onSuccess) => {
@@ -17,7 +20,16 @@ export const fetchData = (onSuccess) => {
 };
 
 
-export const sendData =(onSuccess, body) => {
+let isError = false;
+
+export const sendData = (onSuccess, body) => {
+  isError = false;
+  localStorage.setItem('hashtagValue', hashtag.value);
+  localStorage.setItem('descriptionValue', description.value);
+  localStorage.setItem('currentFilter', getFilter());
+  localStorage.setItem('currentScale', getScale());
+  localStorage.setItem('currentImage', getSrc());
+
   fetch(`${SERVER_URL}`, {
     method: 'POST',
     body,
@@ -25,13 +37,20 @@ export const sendData =(onSuccess, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess(response.json());
+        showMessage(true);
       } else {
         showAlert(ERR_SEND_MESSAGE);
+        showMessage(false);
+        isError = true;
       }
     })
     .then((data) => onSuccess(data))
     .catch(() => {
+      showMessage(false);
       showAlert(ERR_SEND_MESSAGE);
+      isError = true;
     });
 };
 
+
+export {isError};
